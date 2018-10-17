@@ -41,6 +41,6 @@ Add a `books` table with columns for:
     - [ ] Give alternating rows difference in color
     - [ ] Give Labels to the input boxes
     - [ ] Give the form its own area on the page -- make it distinct from the table
-    - [ ] Maeke the page responsive -- Bootstrap Containers will be helpful!
+    - [ ] Make the page responsive -- Bootstrap Containers will be helpful!
 - [ ] Add validation to your form
 
