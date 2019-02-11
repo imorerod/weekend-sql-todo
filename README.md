@@ -43,19 +43,24 @@ Add a `magazines` table with columns for:
  - `issue_number`: the magazine issue number
  - `pages`: how many pages in the magazine
 
-- Magazines
+Requirements
     - [ ] GET route to send back all magazines 
     - [ ] POST route to add a magazine
     - [ ] `index.html` page shows all magazines (Ajax GET)
     - [ ] page allows you to add a new magazine (Ajax POST)
     - [ ] Clear form on successful add of new magazine
     - [ ] Page should refresh with up to date data after new magazine added
+
+### Styling
+
 - [ ] Improve the styling of the page -- Bootstrap & CSS
     - [ ] Center the header, table, on the page
     - [ ] Give alternating rows difference in color
     - [ ] Give Labels to the input boxes
     - [ ] Give the form its own area on the page -- make it distinct from the table
     - [ ] Make the page responsive -- Bootstrap Containers will be helpful!
+
+### Validation
 - [ ] Add validation to your form(s)
     - [ ] If a user tries to enter a book or magazine where one of the fields is empty, it should show an alert and not make a request to the server.
 
