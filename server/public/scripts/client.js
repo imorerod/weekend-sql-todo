@@ -2,6 +2,7 @@ $(document).on(onReady);
 
 function onReady(){
     getBookstore();
+    $('js-btn-addBook').on('click', clickAddBook);
 }
 
 function getBookstore(){
@@ -11,6 +12,10 @@ function getBookstore(){
     }).then(function(arrayFromDatabase){
         render(arrayFromDatabase);
     });
+}
+
+function clickAddBook(){
+
 }
 
 function render(){
