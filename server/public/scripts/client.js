@@ -15,8 +15,30 @@ function getBookstore(){
 }
 
 function clickAddBook(){
+    const title = $('title').val();
+    const author = $('address').val();
+    const published = $('published').val();
 
+    const bookObject = {
+        title,
+        author,
+        published
+    }
+
+    postBook(bookObject);
 }
+
+function postBook(bookObject){
+    $.ajax({
+        type: 'POST',
+        url: '/bookstore',
+        data: bookObject
+    }).then(function(response){
+        getBookstore();
+    })
+}
+
+
 
 function render(){
 
