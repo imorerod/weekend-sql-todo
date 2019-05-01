@@ -18,6 +18,8 @@ router.get('/', (req, res) => {
 router.post('/', (req,res) => {
     const bookObject = req.body;
 
+    console.log(bookObject);
+
     const queryString = `INSERT INTO bookstore (title, author, published)
                             VALUES ($1, $2, $3);`;
 
@@ -26,12 +28,12 @@ router.post('/', (req,res) => {
         bookObject.author,
         bookObject.published])
     .then((response) => {
-        res.send(201);
+        res.sendStatus(201);
     })
     .catch((err) => {
         console.log('Error saving to DB: ', err);
         res.sendStatus(500);
     });
-}):
+});
 
 module.exports = router;

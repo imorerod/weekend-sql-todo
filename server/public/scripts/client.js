@@ -1,45 +1,67 @@
-$(document).on(onReady);
+$(document).ready(onReady);
 
-function onReady(){
+function onReady() {
     getBookstore();
-    $('js-btn-addBook').on('click', clickAddBook);
+    getMagazineList();
+    $('.js-btn-addBook').on('click', clickAddBook);
+    $('.js-btn-addMagazine').on('click', clickAddMagazine);
 }
 
-function getBookstore(){
+function getBookstore() {
     $.ajax({
         type: 'GET',
         url: '/bookstore'
-    }).then(function(arrayFromDatabase){
+    }).then(function (arrayFromDatabase) {
         render(arrayFromDatabase);
     });
 }
 
-function clickAddBook(){
-    const title = $('title').val();
-    const author = $('address').val();
-    const published = $('published').val();
+function getMagazineList(){
+    $.ajax({
+        type: 'GET',
+        url: '/magazine'
+    }).then(function (arrayFromDatabase) {
+        render(arrayFromDatabase);
+    });
+}
+
+function clickAddBook() {
+    const title = $('.title').val();
+    const author = $('.author').val();
+    const published = $('.published').val();
 
     const bookObject = {
         title,
         author,
         published
     }
+    $('.title').val('');
+    $('.author').val('');
+    $('.published').val('');
 
     postBook(bookObject);
 }
 
-function postBook(bookObject){
+function postBook(bookObject) {
+    console.log(bookObject);
     $.ajax({
         type: 'POST',
         url: '/bookstore',
         data: bookObject
-    }).then(function(response){
+    }).then(function (response) {
         getBookstore();
     })
 }
 
-
-
-function render(){
-
+function render(arrayFromDatabase) {
+    $('#container').empty();
+    for (let book of arrayFromDatabase) {
+        $('#container').append(`
+    <div>
+        <h2>${book.title}</h2>
+        <h3>${book.author}</h3>
+        <h4>${book.published}</h4>
+    </div>
+    `);
+    }
 }

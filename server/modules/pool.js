@@ -9,7 +9,7 @@ const pool = new Pool({
     idleTimeoutMillis: 30000
 });
 
-pool.on('connect' () => {
+pool.on('connect', () => {
     console.log('Pool connected');
 });
 
