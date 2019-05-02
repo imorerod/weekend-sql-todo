@@ -3,6 +3,7 @@ $(document).ready(onReady);
 function onReady() {
     getBookstore();
     $('.js-btn-addBook').on('click', clickAddBook);
+    $('#container').on('click', ''.js - btn - delete ', deleteBook);
 }
 
 function getBookstore() {
@@ -40,6 +41,18 @@ function postBook(bookObject) {
     }).then(function (response) {
         getBookstore();
     })
+}
+
+function deleteBook() {
+    const bookId = $(this).parent().data('id');
+    console.log(bookId);
+
+    $.ajax({
+        type: 'DELETE',
+        url: '/bookstore/delete/' + bookId
+    }).then(function (response) {
+        getBookstore();
+    });
 }
 
 function render(arrayFromDatabase) {
