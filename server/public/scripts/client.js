@@ -4,6 +4,7 @@ function onReady() {
     getBookstore();
     $('.js-btn-addBook').on('click', clickAddBook);
     $('#container').on('click', '.js-btn-delete', deleteBook);
+    $('#container').on('click', '.book', updateIfRead)
 }
 
 function getBookstore() {
@@ -43,6 +44,17 @@ function postBook(bookObject) {
     })
 }
 
+function updateIfRead() {
+    const bookId = $(this).data('id');
+
+    $.ajax({
+        type: 'PUT',
+        url: '/bookstore/read/' + bookId
+    }).then(function (response) {
+        getBookstore();
+    });
+}
+
 function deleteBook() {
     const bookId = $(this).parent().data('id');
     console.log(bookId);
@@ -57,14 +69,25 @@ function deleteBook() {
 
 function render(arrayFromDatabase) {
     $('#container').empty();
+
     for (let book of arrayFromDatabase) {
+        let readString = 'I should read this.';
+        if (book.read == true) {
+            readString = 'I read this.';
+        }
+
         $('#container').append(`
-    <div data-id="${book.id}">
+    <div data-id="${book.id}" class="book">
         <h2>${book.title}</h2>
         <h3>${book.author}</h3>
         <h4>${book.published}</h4>
         <button class="js-btn-delete">Delete</button>
     </div>
     `);
+
+        if (book.read == true) {
+            const element = $('#container').children().last();
+            element.addClass('read');
+        }
     }
 }
