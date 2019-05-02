@@ -3,7 +3,7 @@ $(document).ready(onReady);
 function onReady() {
     getBookstore();
     $('.js-btn-addBook').on('click', clickAddBook);
-    $('#container').on('click', ''.js - btn - delete ', deleteBook);
+    $('#container').on('click', '.js-btn-delete', deleteBook);
 }
 
 function getBookstore() {
@@ -15,7 +15,7 @@ function getBookstore() {
     });
 }
 
-}function clickAddBook() {
+function clickAddBook() {
     const title = $('.title').val();
     const author = $('.author').val();
     const published = $('.published').val();
@@ -59,10 +59,11 @@ function render(arrayFromDatabase) {
     $('#container').empty();
     for (let book of arrayFromDatabase) {
         $('#container').append(`
-    <div>
+    <div data-id="${book.id}">
         <h2>${book.title}</h2>
         <h3>${book.author}</h3>
         <h4>${book.published}</h4>
+        <button class="js-btn-delete">Delete</button>
     </div>
     `);
     }

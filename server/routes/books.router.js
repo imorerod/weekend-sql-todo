@@ -37,7 +37,7 @@ router.post('/', (req,res) => {
 });
 
 router.delete('/delete/:id', (req,res) => {
-    const queryString = 'DELETE FROM books WHERE id=$1;';
+    const queryString = `DELETE FROM bookstore WHERE id=$1;`;
 
     pool.query(queryString, [req.params.id])
     .then((response) => {
