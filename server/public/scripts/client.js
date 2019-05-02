@@ -2,9 +2,7 @@ $(document).ready(onReady);
 
 function onReady() {
     getBookstore();
-    getMagazineList();
     $('.js-btn-addBook').on('click', clickAddBook);
-    $('.js-btn-addMagazine').on('click', clickAddMagazine);
 }
 
 function getBookstore() {
@@ -16,16 +14,7 @@ function getBookstore() {
     });
 }
 
-function getMagazineList(){
-    $.ajax({
-        type: 'GET',
-        url: '/magazine'
-    }).then(function (arrayFromDatabase) {
-        render(arrayFromDatabase);
-    });
-}
-
-function clickAddBook() {
+}function clickAddBook() {
     const title = $('.title').val();
     const author = $('.author').val();
     const published = $('.published').val();
