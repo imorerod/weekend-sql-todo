@@ -36,4 +36,16 @@ router.post('/', (req,res) => {
     });
 });
 
+router.delete('/delete/:id', (req,res) => {
+    const queryString = 'DELETE FROM books WHERE id=$1;';
+
+    pool.query(queryString, [req.params.id])
+    .then((response) => {
+        res.sendStatus(200);
+    })
+    .catch((err) => {
+        console.log('Error deleting: ', err);
+    });
+})
+
 module.exports = router;
