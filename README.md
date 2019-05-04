@@ -1,66 +1,50 @@
-# PG GET & POST
+Weekend Challenge: SQL To-Do List
+Hello Primers!
 
-```
-,________,         .------,          .------,         .------.
-|________|       ,'_____,'|        ,'_____,'|        (        )
-|        |       |      | |        | ____ | |        |~------~|
-|        |       |      | |        | ____ | |        |~------~|
-|        |       |      | ;        | ____ | ;        |~------~|
-|________|       |______|'         |______|'         `.______.'
- HTML/CSS          jQuery        Node / Express      PostgreSQL
-```
-Let's build a basic bookstore! 
+Welcome to your weekend challenge!
 
-We want to make a page to show all of our books and add new ones.
+Full stack is pretty awesome, huh? The idea that you are able to spin up a full application architecture in such a short time is pretty incredible. This weekend is all about showing us that you have a handle on each of the different parts of the full stack.
 
+The To-Do App
+You are going to create a 'TO DO' application. This type of application is very common to tackle when learning a new language, which makes it extremely valuable to work through for the first time. Chances are good that at some point in your career you will tackle this again while learning another language.
 
-## Database Setup
+Here are the specific components for the challenge:
 
-Set up a `bookstore` database.  
+Create a front end experience that allows a user to create a Task.
+When the Task is created, it should be stored inside of a database (SQL)
+Whenever a Task is created the front end should refresh to show all tasks that need to be completed.
+Each Task should have an option to 'Complete' or 'Delete'.
+When a Task is complete, its visual representation should change on the front end. For example, the background of the task container could change from gray to green. The complete option should be 'checked off'. Each of these are accomplished in CSS, but will need to hook into logic to know whether or not the task is complete.
+Whether or not a Task is complete should also be stored in the database.
+Deleting a Task should remove it both from the front end as well as the Database.
+Styling
+Use CSS styling to move the aesthetic of the page beyond the vanilla HTML look:
 
-Add a `books` table with columns for:
- - `title`: the name of the book - required, allow up to 250 characters
- - `author`: the author of the book - required, allow up to 100 characters
- - `published`: the date originally published - optional 
+background color of the page
+font family and size
+text color & or background color of tasks to show whether or not they have been completed
+Approach
+We would recommend you spend some time thinking about how to approach this problem. Think through all the logic that will be needed prior to writing any code. Take your time, relax, remember that impostor syndrome is real, and that you are capable of knocking this out of the park!
 
+Create a Database
+Be sure to create a new database through Postico. Use the name weekend-to-do-app. You will need to use this name in your database connection configuration on your server.
 
-## Base Mode
+Database Structure
+Please include a database.sql text file in your repo that includes all of your CREATE TABLE queries. This is so we can re-create your database while testing your app.
 
-- [xxxxx ] Express server setup w/ static files
-- [xxxx ] GET route to send back all books 
-- [ ] POST route to add a book
-- [ ] `index.html` page shows all books (Ajax GET)
-- [ ] page allows you to add a new book (Ajax POST)
-- [ ] Clear form on successful add of new book
-- [ ] Page should refresh with up to date data after new book added
+Stretch Goals
+For each of your strech goals, you will be practicing git branching. Please refer to the branching notes for a reminder on commands. Each branch will be merged into master using --no-ff. This will allow us to see that you branched your feature when you turn in your code.
 
-## Stretch Goals
+feature-styling-bootstrap
 
-### Magazines
+ Add Bootstrap to the front end and style it up!
+Buttons -- make the creation buttons and completion buttons green and the delete red.
+Inputs -- make your text inputs styled in the bootstrap way
+Responsive -- make your app responsive to different screen sizes -- check out the Layout section
+feature-confirm-delete
 
-Add a `magazines` table with columns for:
- - `title`: the name of the magazine
- - `issue_number`: the magazine issue number
- - `pages`: how many pages in the magazine
+ In whatever fashion you would like, create an 'are you sure: yes / no' option when deleting a task.
+Some styled options are Bootstrap Modal or Sweet Alerts.
+feature-ordering-task-query
 
-Requirements
-    - [ ] GET route to send back all magazines 
-    - [ ] POST route to add a magazine
-    - [ ] `index.html` page shows all magazines (Ajax GET)
-    - [ ] page allows you to add a new magazine (Ajax POST)
-    - [ ] Clear form on successful add of new magazine
-    - [ ] Page should refresh with up to date data after new magazine added
-
-### Styling
-
-- [ ] Improve the styling of the page -- Bootstrap & CSS
-    - [ ] Center the header, table, on the page
-    - [ ] Give alternating rows difference in color
-    - [ ] Give Labels to the input boxes
-    - [ ] Give the form its own area on the page -- make it distinct from the table
-    - [ ] Make the page responsive -- Bootstrap Containers will be helpful!
-
-### Validation
-- [ ] Add validation to your form(s)
-    - [ ] If a user tries to enter a book or magazine where one of the fields is empty, it should show an alert and not make a request to the server.
-
+ Research Query Params to have the request reverse the order of the returned todos.
