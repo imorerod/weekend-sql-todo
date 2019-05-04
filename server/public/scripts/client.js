@@ -1,93 +1,90 @@
 $(document).ready(onReady);
 
 function onReady() {
-    getBookstore();
-    $('.js-btn-addBook').on('click', clickAddBook);
-    $('#container').on('click', '.js-btn-delete', deleteBook);
-    $('#container').on('click', '.book', updateIfRead)
+    getTasks();
+    $('.js-btn-add').on('click', addTaskButton);
+    // $('#container').on('click', '.js-btn-delete', deleteBook);
+    // $('#container').on('click', '.book', updateIfRead)
 }
 
-function getBookstore() {
+function getTasks() {
     $.ajax({
         type: 'GET',
-        url: '/bookstore'
+        url: '/todo'
     }).then(function (arrayFromDatabase) {
         render(arrayFromDatabase);
     });
 }
 
-function clickAddBook() {
-    const title = $('.title').val();
-    const author = $('.author').val();
-    const published = $('.published').val();
+function addTaskButton() {
+    const task = $('.task').val();
+    const completed = $('.completed').val();
 
-    const bookObject = {
-        title,
-        author,
-        published
+    const taskObject = {
+        task,
+        completed
     }
-    $('.title').val('');
-    $('.author').val('');
-    $('.published').val('');
+    $('.task').val('');
+    $('.completed').val('');
 
-    postBook(bookObject);
+    postTask(taskObject);
 }
 
-function postBook(bookObject) {
-    console.log(bookObject);
+function postTask(taskObject) {
+    console.log(taskObject);
     $.ajax({
         type: 'POST',
-        url: '/bookstore',
-        data: bookObject
+        url: '/todo',
+        data: taskObject
     }).then(function (response) {
-        getBookstore();
+        getTasks();
     })
 }
 
-function updateIfRead() {
-    const bookId = $(this).data('id');
+// function updateIfRead() {
+//     const bookId = $(this).data('id');
 
-    $.ajax({
-        type: 'PUT',
-        url: '/bookstore/read/' + bookId
-    }).then(function (response) {
-        getBookstore();
-    });
-}
+//     $.ajax({
+//         type: 'PUT',
+//         url: '/bookstore/read/' + bookId
+//     }).then(function (response) {
+//         getBookstore();
+//     });
+// }
 
-function deleteBook() {
-    const bookId = $(this).parent().data('id');
-    console.log(bookId);
+// function deleteBook() {
+//     const bookId = $(this).parent().data('id');
+//     console.log(bookId);
 
-    $.ajax({
-        type: 'DELETE',
-        url: '/bookstore/delete/' + bookId
-    }).then(function (response) {
-        getBookstore();
-    });
-}
+//     $.ajax({
+//         type: 'DELETE',
+//         url: '/bookstore/delete/' + bookId
+//     }).then(function (response) {
+//         getBookstore();
+//     });
+// }
 
 function render(arrayFromDatabase) {
     $('#container').empty();
 
-    for (let book of arrayFromDatabase) {
-        let readString = 'I should read this.';
-        if (book.read == true) {
-            readString = 'I read this.';
+    for (let task of arrayFromDatabase) {
+        let taskString = 'I have not completed this.';
+        if (task.completed == true) {
+            readString = 'I completed this.';
         }
 
         $('#container').append(`
-    <div data-id="${book.id}" class="book">
-        <h2>${book.title}</h2>
-        <h3>${book.author}</h3>
-        <h4>${book.published}</h4>
-        <button class="js-btn-delete">Delete</button>
+    <div data-id="${task.id}" class="taskDiv">
+        <h2>${task.task}</h2>
+        <h3>${task.completed}</h3>
+        <button class="js-btn-complete">Complete Task</button>
+        <button class="js-btn-delete">Delete Task</button>
     </div>
     `);
 
-        if (book.read == true) {
+        if (task.completed == true) {
             const element = $('#container').children().last();
-            element.addClass('read');
+            element.addClass('completed');
         }
     }
 }

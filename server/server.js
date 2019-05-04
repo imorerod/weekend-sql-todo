@@ -12,6 +12,6 @@ app.listen(PORT, () => {
     console.log(`Listening on port: ${PORT}`);
 });
 
-const booksRouter = require('./routes/books.router');
+const todoRouter = require('./routes/todo.router');
 
-app.use('/bookstore', booksRouter);
+app.use('/todo', todoRouter);
