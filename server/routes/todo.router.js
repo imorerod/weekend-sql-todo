@@ -36,7 +36,7 @@ todoRouter.post('/', (req, res) => {
         });
 });
 
-todoRouter.put('/task/:id', (req, res) => {
+todoRouter.put('/completed/:id', (req, res) => {
     const queryString = `UPDATE "to-do" SET "completed" = true WHERE id=$1;`;
 
     pool.query(queryString, [req.params.id])
@@ -51,16 +51,16 @@ todoRouter.put('/task/:id', (req, res) => {
 
 
 
-todoRouter.delete('/delete/:id', (req,res) => {
+todoRouter.delete('/delete/:id', (req, res) => {
     const queryString = `DELETE FROM "to-do" WHERE id=$1;`;
 
     pool.query(queryString, [req.params.id])
-    .then((response) => {
-        res.sendStatus(200);
-    })
-    .catch((err) => {
-        console.log('Error deleting: ', err);
-    });
+        .then((response) => {
+            res.sendStatus(200);
+        })
+        .catch((err) => {
+            console.log('Error deleting: ', err);
+        });
 })
 
 module.exports = todoRouter;

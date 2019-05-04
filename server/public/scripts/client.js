@@ -47,7 +47,7 @@ function updateTask() {
 
     $.ajax({
         type: 'PUT',
-        url: 'todo/completed/' + taskId
+        url: 'todo/completed/' + taskId // look @ router url
     }).then(function (response) {
         getTasks();
     });
@@ -69,10 +69,6 @@ function render(arrayFromDatabase) {
     $('#container').empty();
 
     for (let task of arrayFromDatabase) {
-        // let taskString = 'I have not completed this.';
-        // if (task.completed == true) {
-        //     readString = 'I completed this.';
-        // }
 
         $('#container').append(`
     <div data-id="${task.id}" class="taskDiv">
@@ -83,9 +79,9 @@ function render(arrayFromDatabase) {
     </div>
     `);
 
-        // if (task.completed == true) {
-        //     const element = $('#container').children().last();
-        //     element.addClass('completed');
-        // }
+        if (task.completed == true) {
+            const element = $('#container').children().last();
+            element.addClass('completed');
+        }
     }
 }
