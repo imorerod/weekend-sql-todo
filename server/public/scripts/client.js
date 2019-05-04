@@ -3,8 +3,8 @@ $(document).ready(onReady);
 function onReady() {
     getTasks();
     $('.js-btn-add').on('click', addTaskButton);
-    // $('#container').on('click', '.js-btn-delete', deleteBook);
-    // $('#container').on('click', '.book', updateIfRead)
+    $('#container').on('click', '.js-btn-complete', updateTask);
+    $('#container').on('click', '.js-btn-delete', deleteTask);
 }
 
 function getTasks() {
@@ -41,37 +41,38 @@ function postTask(taskObject) {
     })
 }
 
-// function updateIfRead() {
-//     const bookId = $(this).data('id');
+function updateTask() {
+    const taskId = $(this).parent().data('id');
+    console.log(taskId);
 
-//     $.ajax({
-//         type: 'PUT',
-//         url: '/bookstore/read/' + bookId
-//     }).then(function (response) {
-//         getBookstore();
-//     });
-// }
+    $.ajax({
+        type: 'PUT',
+        url: 'todo/completed/' + taskId
+    }).then(function (response) {
+        getTasks();
+    });
+}
 
-// function deleteBook() {
-//     const bookId = $(this).parent().data('id');
-//     console.log(bookId);
+function deleteTask() {
+    const taskId = $(this).parent().data('id');
+    console.log(taskId);
 
-//     $.ajax({
-//         type: 'DELETE',
-//         url: '/bookstore/delete/' + bookId
-//     }).then(function (response) {
-//         getBookstore();
-//     });
-// }
+    $.ajax({
+        type: 'DELETE',
+        url: '/todo/delete/' + taskId
+    }).then(function (response) {
+        getTasks();
+    });
+}
 
 function render(arrayFromDatabase) {
     $('#container').empty();
 
     for (let task of arrayFromDatabase) {
-        let taskString = 'I have not completed this.';
-        if (task.completed == true) {
-            readString = 'I completed this.';
-        }
+        // let taskString = 'I have not completed this.';
+        // if (task.completed == true) {
+        //     readString = 'I completed this.';
+        // }
 
         $('#container').append(`
     <div data-id="${task.id}" class="taskDiv">
@@ -82,9 +83,9 @@ function render(arrayFromDatabase) {
     </div>
     `);
 
-        if (task.completed == true) {
-            const element = $('#container').children().last();
-            element.addClass('completed');
-        }
+        // if (task.completed == true) {
+        //     const element = $('#container').children().last();
+        //     element.addClass('completed');
+        // }
     }
 }

@@ -20,45 +20,47 @@ todoRouter.post('/', (req, res) => {
 
     console.log(taskObject);
 
-    const queryString = `INSERT INTO "to-do" (task, completed)
+    const queryString = `INSERT INTO "to-do" ("task", "completed")
                             VALUES ($1, false);`;
 
 
-// taskObject.completed]) false takes place of completed so doesn't need to go here
-pool.query(queryString, [
+    // taskObject.completed]) false takes place of completed so doesn't need to go here
+    pool.query(queryString, [
         taskObject.task,])
-    .then((response) => {
+        .then((response) => {
             res.sendStatus(201);
         })
-            .catch((err) => {
-                console.log('Error saving to DB: ', err);
-                res.sendStatus(500);
-            });
+        .catch((err) => {
+            console.log('Error saving to DB: ', err);
+            res.sendStatus(500);
+        });
 });
 
-// todoRouter.put('/read/:id', (req,res) =>{
-//     const queryString = `UPDATE bookstore SET "read"=true WHERE id=$1;`;
+todoRouter.put('/task/:id', (req, res) => {
+    const queryString = `UPDATE "to-do" SET "completed" = true WHERE id=$1;`;
 
-//     pool.query(queryString, [req.params.id])
-//     .then((response) => {
-//         res.sendStatus(200);
-//     })
-//     .catch((err) => {
-//         console.log('Error updating: ', err);
-//         res.sendStatus(500);
-//     });
-// });
+    pool.query(queryString, [req.params.id])
+        .then((response) => {
+            res.sendStatus(200);
+        })
+        .catch((err) => {
+            console.log('Error updating: ', err);
+            res.sendStatus(500);
+        });
+});
 
-// todoRouter.delete('/delete/:id', (req,res) => {
-//     const queryString = `DELETE FROM bookstore WHERE id=$1;`;
 
-//     pool.query(queryString, [req.params.id])
-//     .then((response) => {
-//         res.sendStatus(200);
-//     })
-//     .catch((err) => {
-//         console.log('Error deleting: ', err);
-//     });
-// })
+
+todoRouter.delete('/delete/:id', (req,res) => {
+    const queryString = `DELETE FROM "to-do" WHERE id=$1;`;
+
+    pool.query(queryString, [req.params.id])
+    .then((response) => {
+        res.sendStatus(200);
+    })
+    .catch((err) => {
+        console.log('Error deleting: ', err);
+    });
+})
 
 module.exports = todoRouter;
