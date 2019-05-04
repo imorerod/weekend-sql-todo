@@ -15,24 +15,25 @@ todoRouter.get('/', (req, res) => {
         })
 });
 
-todoRouter.post('/', (req,res) => {
-const taskObject = req.body;
+todoRouter.post('/', (req, res) => {
+    const taskObject = req.body;
 
-console.log(taskObject);
+    console.log(taskObject);
 
-const queryString = `INSERT INTO "to-do" (task)
+    const queryString = `INSERT INTO "to-do" (task, completed)
                             VALUES ($1, false);`;
 
-    pool.query(queryString, [
-       taskObject.task,
-        taskObject.completed])
+
+// taskObject.completed]) false takes place of completed so doesn't need to go here
+pool.query(queryString, [
+        taskObject.task,])
     .then((response) => {
-        res.sendStatus(201);
-    })
-    .catch((err) => {
-        console.log('Error saving to DB: ', err);
-        res.sendStatus(500);
-    });
+            res.sendStatus(201);
+        })
+            .catch((err) => {
+                console.log('Error saving to DB: ', err);
+                res.sendStatus(500);
+            });
 });
 
 // todoRouter.put('/read/:id', (req,res) =>{
