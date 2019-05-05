@@ -1,10 +1,23 @@
+body {
+    background-color: #FFE39F;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.js-btn-add {
+    background-color: #FF9D75;
+}
+
+.btnDiv {
+    margin: 0 0 0 20px;
+}
 .taskDiv {
-    background-color: lightcoral;
+    background-color: #FF6F5F;
     border: 1px solid black;
     margin: 10px 0;
     padding: 10px;
+    width: 450px;
 }
 
 .completed {
-    background-color: lightgreen;
+    background-color: #A7D2D6;
 }
