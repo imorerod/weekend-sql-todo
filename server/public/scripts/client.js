@@ -43,7 +43,6 @@ function postTask(taskObject) {
 
 function updateTask() {
     const taskId = $(this).parent().data('id');
-    console.log(taskId);
 
     $.ajax({
         type: 'PUT',
@@ -55,7 +54,6 @@ function updateTask() {
 
 function deleteTask() {
     const taskId = $(this).parent().data('id');
-    console.log(taskId);
 
     $.ajax({
         type: 'DELETE',
@@ -72,12 +70,10 @@ function render(arrayFromDatabase) {
 
         $('#container').append(`
     <div data-id="${task.id}" class="taskDiv">
-        <h2>${task.task}
-            <button class="js-btn-complete">Complete Task</button>
-            <button class="js-btn-delete">Delete Task</button>
-        </h2>
+        <h2>${task.task}</h2>
         <h3>${task.completed}</h3>
-        
+        <button class="js-btn-complete">Complete Task</button>
+        <button class="js-btn-delete">Delete Task</button>
     </div>
     `);
 

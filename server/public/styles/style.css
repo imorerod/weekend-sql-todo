@@ -5,11 +5,9 @@ body {
 
 .js-btn-add {
     background-color: #FF9D75;
+    font-weight: bold;
 }
 
-.btnDiv {
-    margin: 0 0 0 20px;
-}
 .taskDiv {
     background-color: #FF6F5F;
     border: 1px solid black;
