@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 app.use(express.static('server/public'));
 
 app.listen(port, () => {
-    console.log(`Listening on port: ${PORT}`);
+    console.log(`Listening on port: ${port}`);
 });
 
 const todoRouter = require('./routes/todo.router');
